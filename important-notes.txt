@@ -1,0 +1,50 @@
+// to use the material-ui FormControl 
+and create a drop down menu 
+        <FormControl className='app__dropdown'>
+          <Select variant='outlined' value='abc'>
+            {
+              countries.map(country =>(     // mapping through each country to add it up in the drop down
+                <MenuItem value={country}>
+                  {country}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+###############################################################################
+
+  // useEffect is a hook used to run a segment of code
+  // based on a given condition
+  useEffect(() => {
+    const getCountriesData = async ()=>{
+      await fetch('https://corona.lmao.ninja/v2/countries?yesterday=&sort=')
+      .then((response) => response.json())
+      .then((data) =>{
+         const countries = data.map((country)=>(
+           {
+             name: country.country,
+             value: country.countryInfo.iso2
+           }
+         ));
+         setCountries(countries);
+      });
+
+    };
+    getCountriesData();
+  }, []);
+###################################################################################
+
+// this function is used to update the 
+// countryname on the dropdown menu  
+// by using the onChange listener 
+  const onCountryChange = async (event) =>{
+    const countryCode=event.target.value;
+    console.log('country-code is', countryCode);
+    setCountry(countryCode);
+  };
+
+
+
+
+hbase_groups_official@aol.com
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
