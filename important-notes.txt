@@ -46,5 +46,5 @@ and create a drop down menu
 
 
 hbase_groups_official@aol.com
-  git config --global user.email "you@example.com"
-  git config --global user.name "Your Name"
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
