@@ -4,6 +4,15 @@
 body{
   background-color: #f5f6fa;
 }
+.app{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+
+}
+.app__left{
+  flex:.9;
+}
 .app__header{
   display: flex;
   align-items: center;
@@ -14,4 +23,11 @@ body{
 .app__stats{
   display: flex;
   justify-content: space-between;
+}
+
+/* using media query to make app responsive */
+@media (max-width:990px){
+  .app{
+    flex-direction: column;
+  }
 }

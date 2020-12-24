@@ -42,9 +42,7 @@ and create a drop down menu
     setCountry(countryCode);
   };
 
+#####################################################################################
+diveded my app in two segments 
 
-
-
-hbase_groups_official@aol.com
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
+app__left & app__right
