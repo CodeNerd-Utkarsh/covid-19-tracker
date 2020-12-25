@@ -2,18 +2,18 @@ import { Card, CardContent, FormControl, MenuItem, Select } from '@material-ui/c
 import { useEffect, useState } from 'react';
 import './App.css';
 import InfoBox from './components/InfoBox';
+import LineGraph from './components/LineGraph';
 import Map from './components/Map';
+import Table from './components/Table';
 
 function App() {
   const [countries, setCountries] = useState([]);
-  //  const [countries, setCountries] = useState([
-  //   'USA','UK','INDIA','RUSSIA','ITALY'
-  // ]); 
-  //dummy state
   const [country, setCountry] = useState('worldwide');
   const [countryInfo, setCountryInfo] = useState({});
+  const [TableData, setTableData] = useState([]);
+
   useEffect(() => {
-    fetch('https://corona.lmao.ninja/v2/countries?yesterday=&sort=')
+    fetch('https://disease.sh/v3/covid-19/all')
     .then((response) => response.json())
     .then((data) =>{
       setCountryInfo(data);
@@ -23,17 +23,20 @@ function App() {
   
   useEffect(() => {
     const getCountriesData = async ()=>{
-      await fetch('https://corona.lmao.ninja/v2/countries?yesterday=&sort=')
+      await fetch('https://disease.sh/v3/covid-19/countries')
       .then((response) => response.json())
       .then((data) =>{
         console.log(data);
          const countries = data.map((country)=>(
            {
              name: country.country,
-             value: country.countryInfo.iso2
+              value: country.countryInfo.iso2
            }
          ));
          setCountries(countries);
+         const sortedData=[...data];
+         sortedData.sort((a,b) => (a.cases > b.cases ? -1 : 1));
+         setTableData(sortedData);
       });
 
     };
@@ -92,7 +95,9 @@ function App() {
         <Card className="app__right">
           <CardContent >
             <h3>Cases of the country</h3>
+            <Table countries={TableData} />
             <h3>WorldWide new cases</h3>
+            <LineGraph />
           </CardContent>
         </Card>
     </div>
